@@ -1,0 +1,33 @@
+<form name="categoriaForm">
+	<div class="modal-header">
+		<h3 class="modal-title">Cadastro de Categoria</h3>
+	</div>
+	<div class="modal-body">
+
+		<div class="form-body">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>Descriação *</label> 
+						<input name="descricao" ng-required="true"
+							ng-model="categoria.descricao" type="text"
+							class="form-control" />
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>Observação</label>
+						<input ng-model="categoria.observacao"
+							type="text" class="form-control">
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" type="button" ng-click="ok()">Salvar</button>
+		<button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+	</div>
+</form>

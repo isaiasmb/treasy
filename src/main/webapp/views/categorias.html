@@ -1,0 +1,64 @@
+<div class="main row tree-container"
+         ng-init="dim=false; highlight=false;">
+
+    <div style="margin:10px 0 30px 0; padding:10px; background-color:#EEEEEE; border-radius:5px; font:12px Tahoma;">
+        <span><b>Produtos</b></span>
+    </div>
+
+    <script type="text/ng-template" id="nodes_renderer.html">
+        <div ui-tree-handle class="tree-node tree-node-content">
+            <a class="btn btn-xs" ng-if="categorias && categorias.length > 0" data-nodrag ng-click="toggle(this)">
+                <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+            </a>
+                        
+            <span ng-bind-html="categoria.descricao | highlight:pattern | trust"></span>
+
+            <div style="float: right;">
+                <button class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remover(this)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                <button class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="adicionar(this)">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button type="button" class="pull-right btn btn-warning btn-xs" ng-click="editar(this)">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </button>
+            </div>
+            
+        </div>
+
+        <ol ui-tree-nodes="" ng-model="categoria.subCategorias" ng-class="{hidden: collapsed}">
+            <li ng-repeat="categoria in categoria.subCategorias" ui-tree-node ng-include="'nodes_renderer.html'"
+				ng-hide="!treeFilter(categoria, pattern, supportedFields)"
+                ng-class="{'filtered-out':!treeFilter(categoria, pattern, supportedFields)}">
+            </li>
+        </ol>
+    </script>
+
+    <div style="margin-bottom: 15px;" class="form-inline">   
+       	 <button style="float: left !important;" class="btn btn-primary btn-sm" data-nodrag ng-click="adicionar(this)">
+         	<span class="glyphicon glyphicon-plus"></span>
+         </button>
+         <div class="form-group" style="float: right;">
+            <button style="margin-right: 0px;" title="Expandir tudo" class="btn btn-default btn-sm" ng-click="expandirTudo()">
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </button>
+            <button style="margin-right: 0px;" title="Fechar tudo" class="btn btn-default btn-sm" ng-click="fecharTudo()">
+                <i class="fa fa-angle-up" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div style="clear: both;"></div>
+        <input style="width: 100%; margin-top: 5px;" type="search" class="form-control" placeholder="Digite para filtrar"  ng-model="pattern">
+    </div>
+
+    <div ui-tree data-drag-enabled="false">
+        <ol ui-tree-nodes="" ng-model="categorias" id="tree-root">
+            <li ng-repeat="categoria in categorias" ui-tree-node ng-include="'nodes_renderer.html'"
+            	ng-hide="!treeFilter(categoria, pattern, supportedFields)"
+                ng-class="{'filtered-out':!treeFilter(categoria, pattern, supportedFields)}"
+                uib-tooltip="{{this.$modelValue.observacao}}">
+            </li>
+        </ol>
+    </div>
+
+</div>

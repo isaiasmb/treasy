@@ -8,4 +8,4 @@ Instruções para rodar a aplicação:
 
 3- Na pasta raiz do projeto, executar o comando mvn install para baixar as dependências do Maven
 
-4- Na pasta '/src/main/webapp/bower_components' executar o comando bower install para baixar as dependências do Bower
+4- Na pasta '/src/main/webapp/' executar o comando bower install para baixar as dependências do Bower
